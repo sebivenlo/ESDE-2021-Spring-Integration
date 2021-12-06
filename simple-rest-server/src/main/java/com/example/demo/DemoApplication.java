@@ -12,13 +12,13 @@ public class DemoApplication {
 
 	@GetMapping("/strings/{str}")
 	public String strings(@PathVariable(name = "str") String str) {
-		System.out.println("I got this string: " + str);
+		System.out.println("/strings received: " + str);
 		return str;
 	}
 
 	@GetMapping("/ints/{int}")
 	public Integer ints(@PathVariable(name = "int") Integer integer) {
-		System.out.println("I got this int: " + integer);
+		System.out.println("/ints received: : " + integer);
 		return integer;
 	}
 
