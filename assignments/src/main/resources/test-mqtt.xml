@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:int-mqtt="http://www.springframework.org/schema/integration/mqtt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+		http://www.springframework.org/schema/integration/mqtt http://www.springframework.org/schema/integration/mqtt/spring-integration-mqtt.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <int-mqtt:message-driven-channel-adapter id="mqttInbound"
+                                             client-id="${mqtt.default.client.id}.src"
+                                             url="tcp://broker.hivemq.com:1883"
+                                             topics="default"
+                                             channel="mqtt-messages"/>
+
+    <int:channel id="mqtt-messages"/>
+
+    <int:logging-channel-adapter id="logger" channel="mqtt-messages"/>
+
+</beans>

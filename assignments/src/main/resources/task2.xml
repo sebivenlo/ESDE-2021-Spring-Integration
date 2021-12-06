@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:int-mqtt="http://www.springframework.org/schema/integration/mqtt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+		http://www.springframework.org/schema/integration/mqtt http://www.springframework.org/schema/integration/mqtt/spring-integration-mqtt.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <int-mqtt:message-driven-channel-adapter id="mqttInbound"
+                                             client-id="${mqtt.default.client.id}.src"
+                                             url="tcp://broker.hivemq.com:1883"
+                                             topics="default"
+                                             channel="mqtt-messages"
+    />
+
+    <int:channel id="mqtt-messages"/>
+
+    <int:channel id="output"/>
+
+    <!-- TODO 2.1 instead of logging lets produce http requests from the messages in the output channel.
+                - In your terminal run: docker run -p 8080:8080 pseverinfontys/simple-rest-server
+                    (to start a very simple local server that we can send requests to.)
+                - Use a int-http:outbound-channel-adapter to send GET requests to http://localhost:8080/strings/
+                    with the message payload added to the end of the URI
+                    (check our documentation for a code example) -->
+    <!-- TODO 2.2 Send messages via MQTT and check the output of the http server to see if requests are made -->
+
+</beans>
