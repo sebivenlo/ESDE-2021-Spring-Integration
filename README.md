@@ -134,13 +134,15 @@ Daniyal Kz - Paul Severin
 ## Message Channel
 - Endpoints do not need to be aware of each others type<!-- .element: class="fragment fade-up" -->
 - They register with channels<!-- .element: class="fragment" -->
-  
   ![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" --> 
 - A channel is responsible to deliver the messages between endpoints <!-- .element: class="fragment" -->
 - Two types:<!-- .element: class="fragment" -->
   1. Point-to-point channel 
   1. Publish-subscribe channel
-
+- XML config example<!-- .element: class="fragment" -->
+``` xml
+ <int:channel id="messages"/>
+```
 <!-- s -->
 ## Endpoints: Channel Adapter
 - Connects a channel to some other system
@@ -162,10 +164,21 @@ Daniyal Kz - Paul Severin
   - Social applications such as Twitter
   - File systems
   - etc.
+- HTTP outbound adapter example<!-- .element: class="fragment" -->
+``` xml
+<int-http:outbound-channel-adapter
+    id="http-gateway"
+    channel="strings"
+    http-method="GET"
+    url-expression=
+      "'http://localhost:8080/' + payload"
+/>
+```
+<!-- .element: class="fragment" -->
 <!-- s -->
 
 ## Endpoints: Transformers
-- Transformation of messages enables them to be consumed across a chain <!-- .element: class="fragment fade-up" -->
+- change messages <!-- .element: class="fragment fade-up" -->
 - data needs to be viewed by different context <!-- .element: class="fragment" -->
 - For example: information must be augmented in the original message <!-- .element: class="fragment" -->
   - need to encrypt/decrypt <!-- .element: class="fragment" -->
@@ -185,24 +198,48 @@ Daniyal Kz - Paul Severin
 <!-- s -->
 
 ## Routers
-- Components that pick messages from a channel<!-- .element: class="fragment fade-up" -->
-- Depending on a set of pre-defined rules, deliver them to different channels<!-- .element: class="fragment" -->
+- Endpoints that pick messages from a channel<!-- .element: class="fragment fade-up" -->
+- Depending on pre-defined rules, deliver them to different channels<!-- .element: class="fragment" -->
 ![README.md](images/spring/router.jpg)
 - SI provides built-in routers: <!-- .element: class="fragment" -->
   - Payload-type router
   - Header value router
   - Recipient list router
   - etc.
+```xml [1|2-3|4-5]
+<int:payload-type-router input-channel="input">
+      <int:mapping type="com.example.orders.SameDayDeliveryOrder"
+                   channel="priority-orders"/>
+      <int:mapping type="com.example.orders.StandardOrder"
+                   channel="orders"/>
+</int:payload-type-router>
+```
+<!-- .element: class="fragment" -->
 <!-- s -->
 
 ## Filters
-- Components that take a boolean decision, whether to pass data or not <!-- .element: class="fragment fade-up" -->
+- Endpoints that take a boolean decision, whether to pass data or not <!-- .element: class="fragment fade-up" -->
 - Two ways to define message filter <!-- .element: class="fragment" -->
   - Write simple Java class and define its methods to take these decisions <!-- .element: class="fragment" -->
-  - Configure it as a message endpoint that delegates to an implementation of the <!-- .element: class="fragment" --> `messageSelectorInterface` <!-- .element: class="fragment" -->
-
+  - Use an expression for the decision <!-- .element: class="fragment" -->
+    - Example:<!-- .element: class="fragment" -->
+```xml [2]
+<int:filter
+        expression="payload.length > 3" 
+        input-channel="mqtt-messages"
+        output-channel="output"
+/>
+```
+<!-- .element: class="fragment" -->
 <!-- s -->
 
+## Assignments
+- in the *assignments* folder in our repo: https://github.com/sebivenlo/ESDE-2021-Spring-Integration
+- 3 small tasks about:<!-- .element: class="fragment" -->
+  - Transformer
+  - HTTP adapter
+  - Router
+<!-- s -->
 ## Code test
 
 ```java [1-2|3|4]
