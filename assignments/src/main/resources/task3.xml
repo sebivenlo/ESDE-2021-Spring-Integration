@@ -27,7 +27,7 @@
     <int:payload-type-router input-channel="mqtt-messages">
         <int:mapping type="java.lang.String" channel="strings"/>
         <!-- TODO 3.1 In this task we want to send string and integer messages to different http endpoints
-                  add a mapping for Integers -->
+                  add a mapping for Integers using a channel you need to create next -->
     </int:payload-type-router>
 
     <int:channel id="strings"/>
@@ -37,9 +37,10 @@
                                        url-expression="'http://localhost:8080/strings/' + payload"
     />
 
-    <!-- TODO 3.2 Add a channel and outbound-channel-adapter for integers (just like the ones for strings)
+    <!-- TODO 3.2 Create a channel and outbound-channel-adapter for integers (just like the ones for strings)
             use /ints instead of /strings in the URL  -->
-    <int:channel id="ints"/>
+
+
 
     <!-- TODO 3.3 Try it out by sending stings and ints via MQTT and see of they get send to the correct endpoints   -->
 

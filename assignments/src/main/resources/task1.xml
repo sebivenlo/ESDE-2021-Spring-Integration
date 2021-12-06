@@ -23,11 +23,11 @@
     <int:channel id="mqtt-messages"/>
 
     <!-- TODO 1.1 Add a transformer between the MQTT adapter and the logging adapter
-              use "payload.toUpperCase()" as it's expression
+              use "payload.toUpperCase()" as it's expression to turn all characters of the message into uppercase
               (hint: you will need another channel and connect it correctly, see how its done in filter-example.xml)   -->
 
      <int:logging-channel-adapter id="logger" channel="mqtt-messages"/>
 
-    <!-- TODO 1.2 Run the RunTask1 class and test your code by sending messages via the browser again
-              your messages should appear in all uppercase in the logs -->
+    <!-- TODO 1.2 Run the RunTask1 class and test your code by sending messages via the browser again.
+                  Your messages should appear in all uppercase in the logs -->
 </beans>
