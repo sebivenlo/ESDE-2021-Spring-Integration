@@ -202,6 +202,7 @@ A generic container for data
   - Header value router
   - Recipient list router
   - etc.
+- Example: <!-- .element: class="fragment" -->
 ```xml [1|2-3|4-5]
 <int:payload-type-router input-channel="input">
       <int:mapping type="com.example.orders.SameDayDeliveryOrder"
