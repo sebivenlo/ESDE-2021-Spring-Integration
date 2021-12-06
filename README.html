@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Spring Integration</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/moon.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/zenburn.css" />
+
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template">
+
+# Spring Integration
+ESDE Workshop\
+2021-12-07
+
+Daniyal Kz - Paul Severin
+
+[GitHub Repo](https://github.com/sebivenlo/ESDE-2021-Spring-Integration)
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Workshop structure
+<!-- TODO -->
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Context
+
+- Enterprise applications are developed over time<!-- .element: class="fragment fade-up" -->
+- Distributed across multiple domains (e.g: Payroll, inventory, reporting)<!-- .element: class="fragment" -->
+- Each module developed independent of each other<!-- .element: class="fragment" -->
+- Interaction between modules and external systems<!-- .element: class="fragment" -->
+- Software grows old, new platforms need to be integrated for maintenance<!-- .element: class="fragment" -->
+- Complexity in integrating these modules inside organizations or with external partners<!-- .element: class="fragment" -->
+- It requires integration of heterogeneous endpoints<!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Solution
+- Enterprise Integration Patterns (EIP)<!-- .element: class="fragment fade-up" -->
+- Collection of standard enterprise challenges and how can they be handled<!-- .element: class="fragment fade-up" -->
+- Messaging technique<!-- .element: class="fragment fade-up" -->
+- Two heterogeneous modules can interact through data over a predefined connection<!-- .element: class="fragment fade-up" --> 
+- Done in a Asynchronous model<!-- .element: class="fragment fade-up" --> 
+- Provides decoupling, modules are independent on the availability of the other <!-- .element: class="fragment fade-up" --> 
+- They can participate or withdraw from integration without impacting other components <!-- .element: class="fragment fade-up" --> 
+
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Where Spring Integration comes to the picture?
+- Spring Integration is based on the messaging paradigm <!-- .element: class="fragment fade-up" -->
+- Multiple endpoints connect on to a channel, produce or consume messages, and perform further processing based on information in a message <!-- .element: class="fragment" -->
+- Easily integrate with Message brokers such as RabbitMQ or ActiveMQ<!-- .element: class="fragment" -->
+- Enables lightweight messaging within Spring-based applications<!-- .element: class="fragment" -->
+- Supports integration with external systems  via declarative adapters<!-- .element: class="fragment" -->
+- Maintains the separation of concerns<!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Why use it?
+- Motivated by the same goals and principles as the Spring framework<!-- .element: class="fragment" -->
+- Programming to interfaces<!-- .element: class="fragment" -->
+- Favor composition over inheritance<!-- .element: class="fragment" -->
+</script></section><section  data-markdown><script type="text/template">
+
+## Messaging pattern
+- EIP defines patterns for many integration challenges<!-- .element: class="fragment" -->
+- Exchange of messages between heterogeneous systems<!-- .element: class="fragment" -->
+- Three aspect of messaging<!-- .element: class="fragment" -->
+  - Message being exchanged<!-- .element: class="fragment fade-up" -->
+  - The endpoints that participate<!-- .element: class="fragment fade-up" -->
+  - The medium through which messages are delivered<!-- .element: class="fragment fade-up" -->
+- In EIP: <!-- .element: class="fragment" -->
+  - Messages <!-- .element: class="fragment fade-up" -->
+  - Message endpoints <!-- .element: class="fragment fade-up" -->
+  - Message channels <!-- .element: class="fragment fade-up" -->
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Message
+- A generic container for data<!-- .element: class="fragment" -->
+
+![README.md](images/spring/message.jpg)<!-- .element: class="fragment fade-up" -->
+- Header: contains metadata (E.g. id and timestamp)<!-- .element: class="fragment" -->
+- Payload: could be any type of data (E.g. Java Object, XML) <!-- .element: class="fragment" -->
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Message endpoints
+- Communication happens between two components<!-- .element: class="fragment fade-up" -->
+- Two type: <!-- .element: class="fragment fade-up" -->
+  1. Producer endpoint
+  1. Consumer endpoint
+- Endpoints can have functionality and act on the messages<!-- .element: class="fragment" -->
+  - Validate
+  - Route
+  - Filter
+  - Aggregate
+  - Transform
+  - etc.
+
+</script></section><section  data-markdown><script type="text/template">
+
+## Message Channel
+- Endpoints do not need to be aware of each others type<!-- .element: class="fragment fade-up" -->
+- They register with channels<!-- .element: class="fragment" -->
+
+![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" -->
+
+- A channel is responsible to deliver the messages between endpoints <!-- .element: class="fragment" -->
+- Two types:<!-- .element: class="fragment" -->
+  1. Point-to-point channel 
+  1. Publish-subscribe channel 
+
+</script></section><section  data-markdown><script type="text/template">
+## Endpoints: Channel Adapter
+- Connects a channel to some other system <!-- .element: class="fragment fade-up" -->
+- Two types: <!-- .element: class="fragment" -->
+
+  1. Inbound (source endpoint) - to receive messages from external sources <!-- .element: class="fragment fade-up" -->  
+  ![README.md](images/spring/source-endpoint.jpg) <!-- .element: class="fragment fade-down" -->
+
+  2. Outbound (target endpoint)- to send messages from the Spring Integration to external systems <!-- .element: class="fragment fade-up" -->
+  ![README.md](images/spring/target-endpoint.jpg)<!-- .element: class="fragment fade-down" -->
+
+</script></section><section  data-markdown><script type="text/template">
+## Endpoints: Channel Adapter continued
+  - Out of the box adapters in SI: <!-- .element: class="fragment" -->
+    - Databases
+    - Message queues
+    - Email services
+    - Social applications such as Twitter
+    - File systems
+    - etc.
+</script></section><section  data-markdown><script type="text/template">
+
+## Code test
+
+```java [1-2|3|4]
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+System.out.println("never use System.out.println at home");
+```
+<!-- .element: class="fragment" style="font-size: 0.50em !important;" -->
+
+
+filter example
+transformer
+router task</script></section></div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"convex","transition-speed":"fast","slideNumber":true,"history":true,"progress":true,"width":1248,"height":800}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
