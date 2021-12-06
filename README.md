@@ -45,12 +45,18 @@ Daniyal Kz - Paul Severin
 [GitHub Repo](https://github.com/sebivenlo/ESDE-2021-Spring-Integration)
 
 <!-- s -->
-
 ## Workshop structure
-<!-- TODO -->
+1. Context
+1. Solution
+1. Where does Spring Integration comes to the picture?
+1. Why use SI?
+1. SI terminologies
+1. Break (5 minute)
+1. Quiz
+1. Assignment
+1. Assignment solution & Questions
 
 <!-- s -->
-
 ## Context
 
 - Enterprise applications are developed over time<!-- .element: class="fragment fade-up" -->
@@ -62,7 +68,6 @@ Daniyal Kz - Paul Severin
 - It requires integration of heterogeneous endpoints<!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Solution
 - Enterprise Integration Patterns (EIP)<!-- .element: class="fragment fade-up" -->
 - Collection of standard enterprise challenges and how can they be handled<!-- .element: class="fragment fade-up" -->
@@ -72,9 +77,7 @@ Daniyal Kz - Paul Severin
 - Provides decoupling, modules are independent on the availability of the other <!-- .element: class="fragment fade-up" --> 
 - They can participate or withdraw from integration without impacting other components <!-- .element: class="fragment fade-up" --> 
 
-
 <!-- s -->
-
 ## Where Spring Integration comes to the picture?
 - Spring Integration is based on the messaging paradigm <!-- .element: class="fragment fade-up" -->
 - Multiple endpoints connect on to a channel, produce or consume messages, and perform further processing based on information in a message <!-- .element: class="fragment" -->
@@ -84,13 +87,12 @@ Daniyal Kz - Paul Severin
 - Maintains the separation of concerns<!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Why use it?
 - Motivated by the same goals and principles as the Spring framework<!-- .element: class="fragment" -->
 - Programming to interfaces<!-- .element: class="fragment" -->
 - Favor composition over inheritance<!-- .element: class="fragment" -->
-<!-- s -->
 
+<!-- s -->
 ## Messaging pattern
 - EIP defines patterns for many integration challenges<!-- .element: class="fragment" -->
 - Exchange of messages between heterogeneous systems<!-- .element: class="fragment" -->
@@ -104,16 +106,14 @@ Daniyal Kz - Paul Severin
   - Message channels <!-- .element: class="fragment fade-up" -->
 
 <!-- s -->
-
 ## Message
-- A generic container for data<!-- .element: class="fragment" -->
+A generic container for data
 
 ![README.md](images/spring/message.jpg)<!-- .element: class="fragment fade-up" -->
 - Header: contains metadata (E.g. id and timestamp)<!-- .element: class="fragment" -->
 - Payload: could be any type of data (E.g. Java Object, XML) <!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Message endpoints
 - Communication happens between two components<!-- .element: class="fragment fade-up" -->
 - Endpoints make the handshake transparent and seamless between two heterogenous components. <!-- .element: class="fragment fade-up" -->
@@ -130,7 +130,6 @@ Daniyal Kz - Paul Severin
 
 
 <!-- s -->
-
 ## Message Channel
 - Endpoints do not need to be aware of each others type<!-- .element: class="fragment fade-up" -->
 - They register with channels<!-- .element: class="fragment" -->
@@ -176,7 +175,6 @@ Daniyal Kz - Paul Severin
 ```
 <!-- .element: class="fragment" -->
 <!-- s -->
-
 ## Endpoints: Transformers
 - change messages <!-- .element: class="fragment fade-up" -->
 - data needs to be viewed by different context <!-- .element: class="fragment" -->
@@ -187,7 +185,6 @@ Daniyal Kz - Paul Severin
 - SI provides out-of-the-box transformers such as exchange between XML and JSON formats <!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Message flow endpoints
 - After transformation is done, SI provides seamless flow of messages across heterogenous components <!-- .element: class="fragment fade-up" -->
   - Routers 
@@ -196,7 +193,6 @@ Daniyal Kz - Paul Severin
   - Aggregators
 
 <!-- s -->
-
 ## Routers
 - Endpoints that pick messages from a channel<!-- .element: class="fragment fade-up" -->
 - Depending on pre-defined rules, deliver them to different channels<!-- .element: class="fragment" -->
@@ -216,7 +212,6 @@ Daniyal Kz - Paul Severin
 ```
 <!-- .element: class="fragment" -->
 <!-- s -->
-
 ## Filters
 - Endpoints that take a boolean decision, whether to pass data or not <!-- .element: class="fragment fade-up" -->
 - Two ways to define message filter <!-- .element: class="fragment" -->
