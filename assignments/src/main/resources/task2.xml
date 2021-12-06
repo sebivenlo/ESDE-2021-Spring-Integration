@@ -27,7 +27,7 @@
                     (to start a very simple local server that we can send requests to.)
                 - Use a int-http:outbound-channel-adapter to send GET requests to http://localhost:8080/strings/
                     with the message payload added to the end of the URI
-                    (check our documentation for a code example) -->
+                    (check the channel adapter section of our documentation for a code example) -->
 
 
 
