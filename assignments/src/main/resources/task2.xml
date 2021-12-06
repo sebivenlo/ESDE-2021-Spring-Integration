@@ -29,11 +29,7 @@
                     with the message payload added to the end of the URI
                     (check our documentation for a code example) -->
 
-    <int-http:outbound-channel-adapter id="http-gateway"
-                                       channel="mqtt-messages"
-                                       http-method="GET"
-                                       url-expression="'http://localhost:8080/strings/' + payload"
-    />
+
 
     <!-- TODO 2.2 Test it:
             - (close the process of task 1, in IntelliJ you will find it in the Run tab at the bottom left)
