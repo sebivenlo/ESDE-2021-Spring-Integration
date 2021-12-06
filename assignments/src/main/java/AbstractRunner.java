@@ -7,7 +7,7 @@ import org.springframework.integration.mqtt.inbound.AbstractMqttMessageDrivenCha
 public abstract class AbstractRunner {
 
     /* TODO 0
-        - change the topic field beclow to a random topic name of your choice
+        - change the topic field below to a random topic name of your choice
         - right click the RunTestMQTT file in the project files tab on the left and click "Run RunTestMQTT.main()"
         - open http://www.hivemq.com/demos/websocket-client/ in your browser
         - click connect, enter the topic name you chose
