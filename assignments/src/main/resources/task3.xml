@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:int-http="http://www.springframework.org/schema/integration/http"
+       xmlns:int-mqtt="http://www.springframework.org/schema/integration/mqtt"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+		http://www.springframework.org/schema/integration/mqtt http://www.springframework.org/schema/integration/mqtt/spring-integration-mqtt.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="mqtt-message-converter" class="MessageConverter"/>
+    <int-mqtt:message-driven-channel-adapter id="mqttInbound"
+                                             client-id="${mqtt.default.client.id}.src"
+                                             url="tcp://broker.hivemq.com:1883"
+                                             topics="default"
+                                             channel="mqtt-messages"
+                                             converter="mqtt-message-converter"
+    />
+
+    <int:channel id="mqtt-messages"/>
+
+    <int:payload-type-router input-channel="mqtt-messages">
+        <int:mapping type="java.lang.String" channel="strings"/>
+        <!-- TODO 3.1 In this task we want to send string and integer messages to different http endpoints
+                  add a mapping for Integers -->
+    </int:payload-type-router>
+
+    <int:channel id="strings"/>
+    <int-http:outbound-channel-adapter id="http-gateway"
+                                       channel="strings"
+                                       http-method="GET"
+                                       url-expression="'http://localhost:8080/strings/' + payload"
+    />
+
+    <!-- TODO 3.2 Add a channel and outbound-channel-adapter for integers (just like the ones for strings)
+            use /ints instead of /strings in the URL  -->
+    <int:channel id="ints"/>
+
+    <!-- TODO 3.3 Try it out by sending stings and ints via MQTT and see of they get send to the correct endpoints   -->
+
+</beans>
