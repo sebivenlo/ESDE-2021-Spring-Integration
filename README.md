@@ -203,7 +203,7 @@ A generic container for data
   - Recipient list router
   - etc.
 - Example: <!-- .element: class="fragment" -->
-```xml [1|2-3|4-5]
+```xml
 <int:payload-type-router input-channel="input">
       <int:mapping type="com.example.orders.SameDayDeliveryOrder"
                    channel="priority-orders"/>
