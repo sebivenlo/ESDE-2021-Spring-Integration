@@ -164,7 +164,7 @@ A generic container for data
   - File systems
   - etc.
 - HTTP outbound adapter example<!-- .element: class="fragment" -->
-``` xml
+``` xml []
 <int-http:outbound-channel-adapter
     id="http-gateway"
     channel="strings"
@@ -200,10 +200,8 @@ A generic container for data
 - SI provides built-in routers: <!-- .element: class="fragment" -->
   - Payload-type router
   - Header value router
-  - Recipient list router
-  - etc.
 - Example: <!-- .element: class="fragment" -->
-```xml
+```xml [1|2-3|4-5]
 <int:payload-type-router input-channel="input">
       <int:mapping type="com.example.orders.SameDayDeliveryOrder"
                    channel="priority-orders"/>
@@ -243,10 +241,6 @@ A generic container for data
   - Transformer
   - HTTP adapter
   - Router
-
-<!-- s -->
-## Instructions
-
 
 <!-- s -->
 ## Solution & Questions
