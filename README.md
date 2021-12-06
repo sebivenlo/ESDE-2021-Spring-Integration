@@ -36,7 +36,7 @@ controls: true
 ...
 ---
 
-# Spring Integration
+# Spring Integration (SI)
 ESDE Workshop\
 2021-12-07
 
@@ -116,7 +116,8 @@ Daniyal Kz - Paul Severin
 
 ## Message endpoints
 - Communication happens between two components<!-- .element: class="fragment fade-up" -->
-- Two type: <!-- .element: class="fragment fade-up" -->
+- Endpoints make the handshake transparent and seamless between two heterogenous components. <!-- .element: class="fragment fade-up" -->
+- Two type: <!-- .element: class="fragment" -->
   1. Producer endpoint
   1. Consumer endpoint
 - Endpoints can have functionality and act on the messages<!-- .element: class="fragment" -->
@@ -127,39 +128,79 @@ Daniyal Kz - Paul Severin
   - Transform
   - etc.
 
+
 <!-- s -->
 
 ## Message Channel
 - Endpoints do not need to be aware of each others type<!-- .element: class="fragment fade-up" -->
 - They register with channels<!-- .element: class="fragment" -->
-
-![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" -->
-
+  
+  ![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" --> 
 - A channel is responsible to deliver the messages between endpoints <!-- .element: class="fragment" -->
 - Two types:<!-- .element: class="fragment" -->
   1. Point-to-point channel 
-  1. Publish-subscribe channel 
+  1. Publish-subscribe channel
 
 <!-- s -->
 ## Endpoints: Channel Adapter
-- Connects a channel to some other system <!-- .element: class="fragment fade-up" -->
-- Two types: <!-- .element: class="fragment" -->
+- Connects a channel to some other system
+  - Two types:<!-- .element: class="fragment" -->
+  1. Inbound (source endpoint) - to receive messages from external sources <!-- .element: class="fragment" -->  
 
-  1. Inbound (source endpoint) - to receive messages from external sources <!-- .element: class="fragment fade-up" -->  
   ![README.md](images/spring/source-endpoint.jpg) <!-- .element: class="fragment fade-down" -->
 
   2. Outbound (target endpoint)- to send messages from the Spring Integration to external systems <!-- .element: class="fragment fade-up" -->
+  
   ![README.md](images/spring/target-endpoint.jpg)<!-- .element: class="fragment fade-down" -->
 
 <!-- s -->
 ## Endpoints: Channel Adapter continued
-  - Out of the box adapters in SI: <!-- .element: class="fragment" -->
-    - Databases
-    - Message queues
-    - Email services
-    - Social applications such as Twitter
-    - File systems
-    - etc.
+- Out of the box adapters in SI: <!-- .element: class="fragment" -->
+  - Databases
+  - Message queues
+  - Email services
+  - Social applications such as Twitter
+  - File systems
+  - etc.
+<!-- s -->
+
+## Endpoints: Transformers
+- Transformation of messages enables them to be consumed across a chain <!-- .element: class="fragment fade-up" -->
+- data needs to be viewed by different context <!-- .element: class="fragment" -->
+- For example: information must be augmented in the original message <!-- .element: class="fragment" -->
+  - need to encrypt/decrypt <!-- .element: class="fragment" -->
+  - or converted to some proprietary format <!-- .element: class="fragment" -->
+- Message transformers are a practical design to decouple message producers and message consumers <!-- .element: class="fragment" -->
+- SI provides out-of-the-box transformers such as exchange between XML and JSON formats <!-- .element: class="fragment" -->
+
+<!-- s -->
+
+## Message flow endpoints
+- After transformation is done, SI provides seamless flow of messages across heterogenous components <!-- .element: class="fragment fade-up" -->
+  - Routers 
+  - Filters
+  - Splitters
+  - Aggregators
+
+<!-- s -->
+
+## Routers
+- Components that pick messages from a channel<!-- .element: class="fragment fade-up" -->
+- Depending on a set of pre-defined rules, deliver them to different channels<!-- .element: class="fragment" -->
+![README.md](images/spring/router.jpg)
+- SI provides built-in routers: <!-- .element: class="fragment" -->
+  - Payload-type router
+  - Header value router
+  - Recipient list router
+  - etc.
+<!-- s -->
+
+## Filters
+- Components that take a boolean decision, whether to pass data or not <!-- .element: class="fragment fade-up" -->
+- Two ways to define message filter <!-- .element: class="fragment" -->
+  - Write simple Java class and define its methods to take these decisions <!-- .element: class="fragment" -->
+  - Configure it as a message endpoint that delegates to an implementation of the <!-- .element: class="fragment" --> `messageSelectorInterface` <!-- .element: class="fragment" -->
+
 <!-- s -->
 
 ## Code test
@@ -175,7 +216,21 @@ System.out.println("never use System.out.println at home");
 ```
 <!-- .element: class="fragment" style="font-size: 0.50em !important;" -->
 
+<!-- s -->
+# Break
+5'
 
-filter example
-transformer
-router task
+<!-- s -->
+# Quiz
+<!-- TODO Link to quiz and code -->
+
+<!-- s -->
+# Assignments
+
+<!-- s -->
+## Instructions
+
+
+<!-- s -->
+## Solution & Questions
+
