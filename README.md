@@ -226,27 +226,6 @@ A generic container for data
 />
 ```
 <!-- .element: class="fragment" -->
-<!-- s -->
-
-## Assignments
-- in the *assignments* folder in our repo: https://github.com/sebivenlo/ESDE-2021-Spring-Integration
-- 3 small tasks about:<!-- .element: class="fragment" -->
-  - Transformer
-  - HTTP adapter
-  - Router
-<!-- s -->
-## Code test
-
-```java [1-2|3|4]
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-```
-<!-- .element: class="fragment" style="font-size: 0.50em !important;" -->
 
 <!-- s -->
 # Break
@@ -258,6 +237,11 @@ System.out.println("never use System.out.println at home");
 
 <!-- s -->
 # Assignments
+- in the *assignments* folder in our repo: https://github.com/sebivenlo/ESDE-2021-Spring-Integration
+- 3 small tasks about:<!-- .element: class="fragment" -->
+  - Transformer
+  - HTTP adapter
+  - Router
 
 <!-- s -->
 ## Instructions
