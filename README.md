@@ -186,7 +186,7 @@ A generic container for data
 
 <!-- s -->
 ## Message flow endpoints
-- After transformation is done, SI provides seamless flow of messages across heterogenous components <!-- .element: class="fragment fade-up" -->
+- determining which messages go where <!-- .element: class="fragment fade-up" -->
   - Routers 
   - Filters
   - Splitters

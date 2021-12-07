@@ -18,27 +18,28 @@ public abstract class AbstractRunner {
         - send some message
         - check if they end up in your logs
      */
-    private static final String topic = "paa";
+    private static final String topic = "testtopic/1";
 
     private static Log logger = LogFactory.getLog(RunTestMQTT.class);
 
     public static void run(String filepath) {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext(filepath, RunTestMQTT.class);
 
-//        AbstractMqttMessageDrivenChannelAdapter mqttInbound =
-//                context.getBean("mqttInbound", AbstractMqttMessageDrivenChannelAdapter.class);
+        AbstractMqttMessageDrivenChannelAdapter mqttInbound =
+                context.getBean("mqttInbound", AbstractMqttMessageDrivenChannelAdapter.class);
+
+        mqttInbound.removeTopic("default");
+        mqttInbound.addTopic(topic);
+
+        // As an alternative to the mqtt connection we can also read input from the console and send that as messages to the mqtt-messages channel
+//        MessageChannel inputChannel = context.getBean("mqtt-messages", MessageChannel.class);
 //
-//        mqttInbound.removeTopic("default");
-//        mqttInbound.addTopic(topic);
-
-        MessageChannel inputChannel = context.getBean("mqtt-messages", MessageChannel.class);
-
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Type something: ");
-            String line = scanner.nextLine();
-            inputChannel.send(new GenericMessage<String>(line));
-
-        }
+//        Scanner scanner = new Scanner(System.in);
+//        while (true) {
+//            System.out.println("Type something: ");
+//            String line = scanner.nextLine();
+//            inputChannel.send(new GenericMessage<String>(line));
+//
+//        }
     }
 }
