@@ -3,6 +3,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.mqtt.inbound.AbstractMqttMessageDrivenChannelAdapter;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.GenericMessage;
+
+import java.util.Scanner;
 
 public abstract class AbstractRunner {
 
@@ -21,10 +25,20 @@ public abstract class AbstractRunner {
     public static void run(String filepath) {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext(filepath, RunTestMQTT.class);
 
-        AbstractMqttMessageDrivenChannelAdapter mqttInbound =
-                context.getBean("mqttInbound", AbstractMqttMessageDrivenChannelAdapter.class);
+//        AbstractMqttMessageDrivenChannelAdapter mqttInbound =
+//                context.getBean("mqttInbound", AbstractMqttMessageDrivenChannelAdapter.class);
+//
+//        mqttInbound.removeTopic("default");
+//        mqttInbound.addTopic(topic);
 
-        mqttInbound.removeTopic("default");
-        mqttInbound.addTopic(topic);
+        MessageChannel inputChannel = context.getBean("mqtt-messages", MessageChannel.class);
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Type something: ");
+            String line = scanner.nextLine();
+            inputChannel.send(new GenericMessage<String>(line));
+
+        }
     }
 }
