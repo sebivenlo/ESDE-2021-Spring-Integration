@@ -15,5 +15,5 @@ jobs:
           args: "README.md -o output/report-eisvogel-template.pdf --toc -N --pdf-engine=xelatex --template=./eisvogel.latex --listing -V mainfont=\"DejaVu Sans\""
       - uses: actions/upload-artifact@master
         with:
-          name: report-eisvogel-template.pdf
+          name: spring-integration-workshop-slide.pdf
           path: output

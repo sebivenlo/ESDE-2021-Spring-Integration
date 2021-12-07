@@ -36,7 +36,7 @@ controls: true
 ...
 ---
 
-# Spring Integration
+# Spring Integration (SI)
 ESDE Workshop\
 2021-12-07
 
@@ -45,12 +45,18 @@ Daniyal Kz - Paul Severin
 [GitHub Repo](https://github.com/sebivenlo/ESDE-2021-Spring-Integration)
 
 <!-- s -->
-
 ## Workshop structure
-<!-- TODO -->
+1. Context
+1. Solution
+1. Where does Spring Integration comes to the picture?
+1. Why use SI?
+1. SI terminologies
+1. Break (5 minute)
+1. Quiz
+1. Assignment
+1. Assignment solution & Questions
 
 <!-- s -->
-
 ## Context
 
 - Enterprise applications are developed over time<!-- .element: class="fragment fade-up" -->
@@ -62,7 +68,6 @@ Daniyal Kz - Paul Severin
 - It requires integration of heterogeneous endpoints<!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Solution
 - Enterprise Integration Patterns (EIP)<!-- .element: class="fragment fade-up" -->
 - Collection of standard enterprise challenges and how can they be handled<!-- .element: class="fragment fade-up" -->
@@ -72,9 +77,7 @@ Daniyal Kz - Paul Severin
 - Provides decoupling, modules are independent on the availability of the other <!-- .element: class="fragment fade-up" --> 
 - They can participate or withdraw from integration without impacting other components <!-- .element: class="fragment fade-up" --> 
 
-
 <!-- s -->
-
 ## Where Spring Integration comes to the picture?
 - Spring Integration is based on the messaging paradigm <!-- .element: class="fragment fade-up" -->
 - Multiple endpoints connect on to a channel, produce or consume messages, and perform further processing based on information in a message <!-- .element: class="fragment" -->
@@ -84,13 +87,12 @@ Daniyal Kz - Paul Severin
 - Maintains the separation of concerns<!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Why use it?
 - Motivated by the same goals and principles as the Spring framework<!-- .element: class="fragment" -->
 - Programming to interfaces<!-- .element: class="fragment" -->
 - Favor composition over inheritance<!-- .element: class="fragment" -->
-<!-- s -->
 
+<!-- s -->
 ## Messaging pattern
 - EIP defines patterns for many integration challenges<!-- .element: class="fragment" -->
 - Exchange of messages between heterogeneous systems<!-- .element: class="fragment" -->
@@ -104,19 +106,18 @@ Daniyal Kz - Paul Severin
   - Message channels <!-- .element: class="fragment fade-up" -->
 
 <!-- s -->
-
 ## Message
-- A generic container for data<!-- .element: class="fragment" -->
+A generic container for data
 
 ![README.md](images/spring/message.jpg)<!-- .element: class="fragment fade-up" -->
 - Header: contains metadata (E.g. id and timestamp)<!-- .element: class="fragment" -->
 - Payload: could be any type of data (E.g. Java Object, XML) <!-- .element: class="fragment" -->
 
 <!-- s -->
-
 ## Message endpoints
 - Communication happens between two components<!-- .element: class="fragment fade-up" -->
-- Two type: <!-- .element: class="fragment fade-up" -->
+- Endpoints make the handshake transparent and seamless between two heterogenous components. <!-- .element: class="fragment fade-up" -->
+- Two type: <!-- .element: class="fragment" -->
   1. Producer endpoint
   1. Consumer endpoint
 - Endpoints can have functionality and act on the messages<!-- .element: class="fragment" -->
@@ -127,55 +128,120 @@ Daniyal Kz - Paul Severin
   - Transform
   - etc.
 
-<!-- s -->
 
+<!-- s -->
 ## Message Channel
 - Endpoints do not need to be aware of each others type<!-- .element: class="fragment fade-up" -->
 - They register with channels<!-- .element: class="fragment" -->
-
-![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" -->
-
+  ![README.md](images/spring/channel.jpg)<!-- .element: class="fragment fade-up" --> 
 - A channel is responsible to deliver the messages between endpoints <!-- .element: class="fragment" -->
 - Two types:<!-- .element: class="fragment" -->
   1. Point-to-point channel 
-  1. Publish-subscribe channel 
-
+  1. Publish-subscribe channel
+- XML config example<!-- .element: class="fragment" -->
+``` xml
+ <int:channel id="messages"/>
+```
 <!-- s -->
 ## Endpoints: Channel Adapter
-- Connects a channel to some other system <!-- .element: class="fragment fade-up" -->
-- Two types: <!-- .element: class="fragment" -->
+- Connects a channel to some other system
+  - Two types:<!-- .element: class="fragment" -->
+  1. Inbound (source endpoint) - to receive messages from external sources <!-- .element: class="fragment" -->  
 
-  1. Inbound (source endpoint) - to receive messages from external sources <!-- .element: class="fragment fade-up" -->  
   ![README.md](images/spring/source-endpoint.jpg) <!-- .element: class="fragment fade-down" -->
 
   2. Outbound (target endpoint)- to send messages from the Spring Integration to external systems <!-- .element: class="fragment fade-up" -->
+  
   ![README.md](images/spring/target-endpoint.jpg)<!-- .element: class="fragment fade-down" -->
 
 <!-- s -->
 ## Endpoints: Channel Adapter continued
-  - Out of the box adapters in SI: <!-- .element: class="fragment" -->
-    - Databases
-    - Message queues
-    - Email services
-    - Social applications such as Twitter
-    - File systems
-    - etc.
-<!-- s -->
-
-## Code test
-
-```java [1-2|3|4]
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
-System.out.println("never use System.out.println at home");
+- Out of the box adapters in SI: <!-- .element: class="fragment" -->
+  - Databases
+  - Message queues
+  - Email services
+  - Social applications such as Twitter
+  - File systems
+  - etc.
+- HTTP outbound adapter example<!-- .element: class="fragment" -->
+``` xml []
+<int-http:outbound-channel-adapter
+    id="http-gateway"
+    channel="strings"
+    http-method="GET"
+    url-expression=
+      "'http://localhost:8080/' + payload"
+/>
 ```
-<!-- .element: class="fragment" style="font-size: 0.50em !important;" -->
+<!-- .element: class="fragment" -->
+<!-- s -->
+## Endpoints: Transformers
+- change messages <!-- .element: class="fragment fade-up" -->
+- data needs to be viewed by different context <!-- .element: class="fragment" -->
+- For example: information must be augmented in the original message <!-- .element: class="fragment" -->
+  - need to encrypt/decrypt <!-- .element: class="fragment" -->
+  - or converted to some proprietary format <!-- .element: class="fragment" -->
+- Message transformers are a practical design to decouple message producers and message consumers <!-- .element: class="fragment" -->
+- SI provides out-of-the-box transformers such as exchange between XML and JSON formats <!-- .element: class="fragment" -->
 
+<!-- s -->
+## Message flow endpoints
+- After transformation is done, SI provides seamless flow of messages across heterogenous components <!-- .element: class="fragment fade-up" -->
+  - Routers 
+  - Filters
+  - Splitters
+  - Aggregators
 
-filter example
-transformer
-router task
+<!-- s -->
+## Routers
+- Endpoints that pick messages from a channel<!-- .element: class="fragment fade-up" -->
+- Depending on pre-defined rules, deliver them to different channels<!-- .element: class="fragment" -->
+![README.md](images/spring/router.jpg)
+- SI provides built-in routers: <!-- .element: class="fragment" -->
+  - Payload-type router
+  - Header value router
+- Example: <!-- .element: class="fragment" -->
+```xml [1|2-3|4-5]
+<int:payload-type-router input-channel="input">
+      <int:mapping type="com.example.orders.SameDayDeliveryOrder"
+                   channel="priority-orders"/>
+      <int:mapping type="com.example.orders.StandardOrder"
+                   channel="orders"/>
+</int:payload-type-router>
+```
+<!-- .element: class="fragment" -->
+<!-- s -->
+## Filters
+- Endpoints that take a boolean decision, whether to pass data or not <!-- .element: class="fragment fade-up" -->
+- Two ways to define message filter <!-- .element: class="fragment" -->
+  - Write simple Java class and define its methods to take these decisions <!-- .element: class="fragment" -->
+  - Use an expression for the decision <!-- .element: class="fragment" -->
+    - Example:<!-- .element: class="fragment" -->
+```xml [2]
+<int:filter
+        expression="payload.length > 3" 
+        input-channel="mqtt-messages"
+        output-channel="output"
+/>
+```
+<!-- .element: class="fragment" -->
+
+<!-- s -->
+# Break
+5'
+
+<!-- s -->
+# Quiz
+<!-- TODO Link to quiz and code -->
+
+<!-- s -->
+# Assignments
+- in the *assignments* folder in our repo: https://github.com/sebivenlo/ESDE-2021-Spring-Integration
+- 3 small tasks about:<!-- .element: class="fragment" -->
+  - Transformer
+  - HTTP adapter
+  - Router
+
+<!-- s -->
+## Solution & Questions
+

@@ -22,14 +22,19 @@
 
     <int:channel id="mqtt-messages"/>
 
-    <int:channel id="output"/>
-
-    <!-- TODO 2.1 instead of logging lets produce http requests from the messages in the output channel.
+    <!-- TODO 2.1 instead of logging lets produce http requests from the mqtt messages.
                 - In your terminal run: docker run -p 8080:8080 pseverinfontys/simple-rest-server
                     (to start a very simple local server that we can send requests to.)
                 - Use a int-http:outbound-channel-adapter to send GET requests to http://localhost:8080/strings/
                     with the message payload added to the end of the URI
-                    (check our documentation for a code example) -->
-    <!-- TODO 2.2 Send messages via MQTT and check the output of the http server to see if requests are made -->
+                    (check the channel adapter section of our documentation for a code example) -->
+
+
+
+    <!-- TODO 2.2 Test it:
+            - (close the process of task 1, in IntelliJ you will find it in the Run tab at the bottom left)
+            - run the  RunTask2 class
+            - send messages via MQTT
+            - check the output of the http server to see if requests are made -->
 
 </beans>
