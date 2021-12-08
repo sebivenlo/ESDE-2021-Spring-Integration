@@ -1,5 +1,5 @@
 ---
-title: "Spring Integration"
+title: "Spring Integration Workshop"
 subtitle: "Enterprise Software Development (ESDE) 2021 Module of FHTenL"
 author: [Daniyal Khorashadizadeh - Paul Severin]
 #bibliography: paper.bib
@@ -8,9 +8,7 @@ subject: "Spring Integration Workshop"
 keywords: [Fontys, Markdown, RevealJS, Spring, Spring Integration, Design Patterns, Architectural design patterns]
 lang: "en"
 titlepage: "true"
-# logo: "images/fontyslogo.png"
 titlepage-rule-color: "400070"
-# page-background : "images/fontyslogo-background.png"
 # reveal settings
 # simple black white league beige sky night serif simple solarized blood moon
 theme: moon
@@ -27,12 +25,6 @@ revealOptions:
   width: 1248
   height: 800
 controls: true
-  # parallaxBackgroundImage: 'images/fontys-parallax-all-dark.jpg'
-  # parallaxBackgroundSize: '2100px 1024px'
-  #autoSlide: 4000
-  #loop: true
-
-  # center: false
 ...
 ---
 
@@ -245,3 +237,7 @@ A generic container for data
 <!-- s -->
 ## Solution & Questions
 
+## Resources
+- Chandan Pandey - Spring Integration Essentials
+- [Spring Integration Documenation](https://docs.spring.io/spring-integration/reference/html/)
+- [Spring Integration Examples](https://github.com/spring-projects/spring-integration-samples)
